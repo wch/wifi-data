@@ -79,14 +79,14 @@ bssid_table <- function(logfile) {
   
   # Read in table of all possible channels, and merge in
   all_channels <- read.csv('channels.csv')
-  bssids <- join(bssids, all_channels)
+  bssids <- join(bssids, all_channels, by = "freq")
   arrange(bssids, bssid)
 }
 
 bssids <- bssid_table('wpa_log.txt')
 
-wpa <- join(wpa, bssids)
-wpa_count <- join(wpa_count, bssids)
+wpa <- join(wpa, bssids, by = "bssid")
+wpa_count <- join(wpa_count, bssids, by = "bssid")
 
 # Save processed data to text files -----------------------
 write.csv(wpa, 'wpa_log_filtered.csv', row.names = FALSE)
