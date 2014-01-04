@@ -20,3 +20,14 @@ source('wifi.R')
 ```
 
 At the end, you should have a couple CSV and PNG files of the processed data in your directory.
+
+
+## Notes
+This script scans the syslog for three different types of events, which I categorized like so:
+
+  * success: when text is `CTRL-EVENT-CONNECTED - Connection to e0:1c:41:1e:8b:a8
+completed (auth)`
+  * disconnect: when text is `CTRL-EVENT-DISCONNECTED bssid=e0:1c:41:1e:8a:e8 reason=4`
+  * timeout: when text is `Authentication with e0:1c:41:1e:8b:e8 timed out.`
+
+There are a couple other little details, and there may well be other types of events that I didn't find, but this seems to cover most cases.
