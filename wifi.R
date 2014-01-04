@@ -104,7 +104,7 @@ ggplot(wpa_count, aes(x=reorder(bssid_label, count, sum), y=count, fill=status))
   geom_bar(colour="black", stat="identity") +
   scale_fill_manual(values=c("#666666", "#EE6666", "#0088DD"),
     guide = guide_legend(reverse=TRUE)) +
-  xlab("Abbreviated BSSID") +
+  xlab("Abbreviated BSSID - all start with e0:1c:41:1e") +
   theme_bw() +
   theme(axis.text.x = element_text(angle=90, hjust=0, vjust=0.5, size=12))
 ggsave("connection_counts.png", width=8, height=5, dpi=100)
