@@ -11,6 +11,9 @@ library(ggplot2)
 
 # Read in data --------------------------------------------
 
+# All CoCo BSSIDs start with this - use to filter out other BSSIDs
+coco_bssid <- "^e0:1c:41:1e"
+
 # Filter for successful connections
 logtext_to_df <- function(logfile) {
   logtext <- readLines(logfile)
@@ -59,6 +62,8 @@ logtext_to_df <- function(logfile) {
 
 wpa <- logtext_to_df('wpa_log.txt')
 
+# Drop non-CoCo log data
+wpa <- wpa[grepl(coco_bssid, wpa$bssid), ]
 
 # Summarize counts ----------------------------------------
 
@@ -84,6 +89,9 @@ bssid_table <- function(logfile) {
 }
 
 bssids <- bssid_table('wpa_log.txt')
+
+# Drop non-CoCo log data
+bssids <- bssids[grepl(coco_bssid, bssids$bssid), ]
 
 wpa <- join(wpa, bssids, by = "bssid")
 wpa_count <- join(wpa_count, bssids, by = "bssid")
